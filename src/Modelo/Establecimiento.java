@@ -8,7 +8,7 @@ public class Establecimiento {
 
     public Establecimiento() {
     }
-
+ 
     public Establecimiento(String nit, String nombre_estab, char tipo_estab) {
         this.nit = nit;
         this.nombre_estab = nombre_estab;
