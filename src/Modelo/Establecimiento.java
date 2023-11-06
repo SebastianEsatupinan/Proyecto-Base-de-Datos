@@ -4,12 +4,12 @@ public class Establecimiento {
     
     private String nit;
     private String nombre_estab;
-    private char tipo_estab;
+    private String tipo_estab;
 
     public Establecimiento() {
     }
  
-    public Establecimiento(String nit, String nombre_estab, char tipo_estab) {
+    public Establecimiento(String nit, String nombre_estab, String tipo_estab) {
         this.nit = nit;
         this.nombre_estab = nombre_estab;
         this.tipo_estab = tipo_estab;
@@ -31,11 +31,11 @@ public class Establecimiento {
         this.nombre_estab = nombre_estab;
     }
 
-    public char getTipo_estab() {
+    public String getTipo_estab() {
         return tipo_estab;
     }
 
-    public void setTipo_estab(char tipo_estab) {
+    public void setTipo_estab(String tipo_estab) {
         this.tipo_estab = tipo_estab;
     }
     

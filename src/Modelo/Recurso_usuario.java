@@ -1,9 +1,10 @@
 package Modelo;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Recurso_usuario {
-    
+
     private String codigo_rec_usu;
     private Date fecha_hora;
     private String comentario;
@@ -11,11 +12,11 @@ public class Recurso_usuario {
     public Recurso_usuario() {
     }
 
-    public Recurso_usuario(String codigo_rec_usu, Date fecha_hora, String comentario) {
+    public Recurso_usuario(String codigo_rec_usu, LocalDateTime fecha_hora, String comentario) {
         this.codigo_rec_usu = codigo_rec_usu;
-        this.fecha_hora = fecha_hora;
         this.comentario = comentario;
     }
+
 
     public String getComentario() {
         return comentario;

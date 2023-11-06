@@ -6,3 +6,4 @@ CREATE TABLE IF NOT EXISTS ubicacion (
     departamento VARCHAR(255) NOT NULL,
     descripcion TEXT NOT NULL
 );
+

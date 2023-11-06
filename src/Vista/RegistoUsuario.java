@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.ConexionBD;
+import Modelo.Establecimiento;
 import Modelo.Ubicacion;
 import Modelo.Usuario;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class RegistoUsuario extends javax.swing.JFrame {
 
     Usuario objUsuario;
     Ubicacion objUbicacion;
+    Establecimiento objEstablecimiento;
     ArrayList<Usuario> ListaUsuarios;
     Random random= new Random();
 
@@ -30,8 +32,8 @@ public class RegistoUsuario extends javax.swing.JFrame {
         initComponents();
         objUsuario = new Usuario();
         objUbicacion = new Ubicacion();
+        objEstablecimiento = new Establecimiento();
         ListaUsuarios = new ArrayList<>();
-        
     }
 
     /**
@@ -65,10 +67,22 @@ public class RegistoUsuario extends javax.swing.JFrame {
         jTextBarrio = new javax.swing.JTextField();
         jTextDepartamento = new javax.swing.JTextField();
         jTextDescripcion = new javax.swing.JTextField();
-        establecimiento = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jTextNit = new javax.swing.JTextField();
+        jTextNombreEstab = new javax.swing.JTextField();
+        jTextTipo = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jButtonInsertarU.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonInsertarU.setText("Registrar");
         jButtonInsertarU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,12 +251,85 @@ public class RegistoUsuario extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        establecimiento.setText("Establecimiento");
-        establecimiento.addActionListener(new java.awt.event.ActionListener() {
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Establecimiento");
+
+        jTextNit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                establecimientoActionPerformed(evt);
+                jTextNitActionPerformed(evt);
             }
         });
+
+        jTextNombreEstab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextNombreEstabActionPerformed(evt);
+            }
+        });
+
+        jTextTipo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextTipo.setToolTipText("");
+        jTextTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextTipoActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setText("Nit");
+
+        jLabel19.setText("Nombre:");
+
+        jLabel20.setText("Tipo:");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jTextNombreEstab, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextNit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jTextTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextNit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextNombreEstab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel12.setText("Tipo puede ser:");
+
+        jLabel13.setText("C - Colegios");
+
+        jLabel14.setText("E - Empresa");
+
+        jLabel15.setText("U - universidad");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -250,17 +337,24 @@ public class RegistoUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(establecimiento)
-                .addGap(60, 60, 60)
-                .addComponent(jButtonInsertarU, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(256, 256, 256))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(397, Short.MAX_VALUE)
+                        .addComponent(jButtonInsertarU, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,13 +363,24 @@ public class RegistoUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonInsertarU, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(establecimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonInsertarU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 15, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -294,48 +399,75 @@ public class RegistoUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextEstratoActionPerformed
 
     private void jButtonInsertarUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarUActionPerformed
-    String id_usuario;
-    String nombre_completo;
-    String edad;
-    String estrato;
+    
+    // USUARIO
+    String id_usuario = jTextID.getText();
+    String nombre_completo = jTextNombre.getText();
+    String edad = jTextEdad.getText();
+    String estrato = jTextEstrato.getText();
 
-    id_usuario = jTextID.getText();
-    nombre_completo = jTextNombre.getText();
-    edad = jTextEdad.getText();
-    estrato = jTextEstrato.getText();
+    // UBICACION
+    int codigoU = random.nextInt(90000) + 10000;
+    String codigo = Integer.toString(codigoU);
+    String ciudad = jTextCiudad.getText();
+    String barrio = jTextBarrio.getText();
+    String departamento= jTextDepartamento.getText();
+    String descripcion = jTextDescripcion.getText();;
 
+    //ESTABLECIMIENTO
+    String nit = jTextNit.getText();
+    String nombreEstablecimiento = jTextNombreEstab.getText();
+    String tipo = jTextTipo.getText();
+    
+    // Validar que los campos no estén vacíos
+    if (id_usuario.isEmpty() || nombre_completo.isEmpty() || edad.isEmpty() || estrato.isEmpty()
+            || ciudad.isEmpty() || barrio.isEmpty() || departamento.isEmpty() || descripcion.isEmpty()
+            || nit.isEmpty() || nombreEstablecimiento.isEmpty() || tipo.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios. Por favor, llene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    // Validar que la edad y el estrato sean números
+    try {
+        Integer.parseInt(edad);
+        Integer.parseInt(estrato);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "La edad y el estrato deben ser números enteros.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+     // Validar que el tipo de establecimiento sea U, E o C
+    if (!tipo.matches("[UEC]")) {
+        JOptionPane.showMessageDialog(this, "El tipo de establecimiento debe ser U, E o C.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    // Crear el objeto de Usuario
     objUsuario = new Usuario(id_usuario, nombre_completo, edad, estrato, null, null);
     ListaUsuarios.add(objUsuario);
     System.out.println(ListaUsuarios);
-
-    // UBICACION
-    int codigoU;
-    String codigo;
-    String ciudad;
-    String barrio;
-    String departamento;
-    String descripcion;
-
-    codigoU = random.nextInt(90000) + 10000;
-    codigo = Integer.toString(codigoU);
-    ciudad = jTextCiudad.getText();
-    barrio = jTextBarrio.getText();
-    departamento = jTextDepartamento.getText();
-    descripcion = jTextDescripcion.getText();
-
+    
+    // Crear el objeto de Ubicacion
     objUbicacion = new Ubicacion(codigo, ciudad, barrio, departamento, descripcion);
     System.out.println(objUbicacion);
+    
+    // Crear el objeto de Establecimiento
+    objEstablecimiento = new Establecimiento(nit, nombreEstablecimiento, tipo);
+    System.out.println(objEstablecimiento);
+
 
     // BD conexión
     ConexionBD conexionBD = new ConexionBD();
-    boolean exito = conexionBD.insertarUsuario(objUsuario, objUbicacion);
+    boolean exito = conexionBD.insertarUsuario(objUsuario, objUbicacion, objEstablecimiento);
 
     if (exito) {
         JOptionPane.showMessageDialog(this, "Registro exitoso");
     } else {
         JOptionPane.showMessageDialog(this, "Error al registrar");
     }
-
+    
+    Recurso Recc = new Recurso();
+    Recc.setVisible(true);
     // Cerrar la ventana actual
     this.setVisible(false);
     }//GEN-LAST:event_jButtonInsertarUActionPerformed
@@ -356,13 +488,17 @@ public class RegistoUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextDescripcionActionPerformed
 
-    private void establecimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_establecimientoActionPerformed
+    private void jTextNombreEstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreEstabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNombreEstabActionPerformed
 
-     String nit = JOptionPane.showInputDialog("Digite el numero de NIT");
-     String nombreEstablecimiento = JOptionPane.showInputDialog("Digite el nombre del establecimiento");
-     String tipo = JOptionPane.showInputDialog("Digite C si es Colegio, U si es Universidad y E si es una Empresa");
-          
-    }//GEN-LAST:event_establecimientoActionPerformed
+    private void jTextTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextTipoActionPerformed
+
+    private void jTextNitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -401,12 +537,19 @@ public class RegistoUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton establecimiento;
     private javax.swing.JButton jButtonInsertarU;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -416,6 +559,7 @@ public class RegistoUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField jTextBarrio;
     private javax.swing.JTextField jTextCiudad;
     private javax.swing.JTextField jTextDepartamento;
@@ -423,6 +567,9 @@ public class RegistoUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextEdad;
     private javax.swing.JTextField jTextEstrato;
     private javax.swing.JTextField jTextID;
+    private javax.swing.JTextField jTextNit;
     private javax.swing.JTextField jTextNombre;
+    private javax.swing.JTextField jTextNombreEstab;
+    private javax.swing.JTextField jTextTipo;
     // End of variables declaration//GEN-END:variables
 }

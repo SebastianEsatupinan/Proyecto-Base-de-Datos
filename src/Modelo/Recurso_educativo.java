@@ -5,12 +5,12 @@ public class Recurso_educativo {
     
     private String codigo_rec_ed;
     private Date fecha_cargp;
-    private char tipo_rec_ed;
+    private String tipo_rec_ed;
 
     public Recurso_educativo() {
     }
 
-    public Recurso_educativo(String codigo_rec_ed, Date fecha_cargp, char tipo_rec_ed) {
+    public Recurso_educativo(String codigo_rec_ed, Date fecha_cargp, String tipo_rec_ed) {
         this.codigo_rec_ed = codigo_rec_ed;
         this.fecha_cargp = fecha_cargp;
         this.tipo_rec_ed = tipo_rec_ed;
@@ -32,11 +32,11 @@ public class Recurso_educativo {
         this.fecha_cargp = fecha_cargp;
     }
 
-    public char getTipo_rec_ed() {
+    public String getTipo_rec_ed() {
         return tipo_rec_ed;
     }
 
-    public void setTipo_rec_ed(char tipo_rec_ed) {
+    public void setTipo_rec_ed(String tipo_rec_ed) {
         this.tipo_rec_ed = tipo_rec_ed;
     }
     
