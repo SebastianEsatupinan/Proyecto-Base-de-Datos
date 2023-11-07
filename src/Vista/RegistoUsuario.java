@@ -427,6 +427,16 @@ public class RegistoUsuario extends javax.swing.JFrame {
         return;
     }
     
+    // Validar que el ID del usuario sea un número entero
+    String idUsuarioString = jTextID.getText();
+    try {
+        int idUsuario = Integer.parseInt(idUsuarioString);
+        // Si llega a este punto, el ID del usuario es un número entero
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El ID del usuario debe ser un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
     // Validar que la edad y el estrato sean números
     try {
         Integer.parseInt(edad);
