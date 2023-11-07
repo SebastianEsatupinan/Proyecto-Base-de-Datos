@@ -26,11 +26,19 @@
           <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="115" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButtonIniciarSesion" pref="178" max="32767" attributes="0"/>
-                  <Component id="jButtonRegistrarse" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jButtonIniciarSesion" pref="178" max="32767" attributes="0"/>
+                          <Component id="jButtonRegistrarse" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="MostrarDatos" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,7 +51,9 @@
               <Component id="jButtonIniciarSesion" min="-2" pref="44" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButtonRegistrarse" min="-2" pref="48" max="-2" attributes="0"/>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="MostrarDatos" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,6 +82,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRegistrarseActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="MostrarDatos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Datos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MostrarDatosActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
