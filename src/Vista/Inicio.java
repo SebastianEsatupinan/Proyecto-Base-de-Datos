@@ -79,8 +79,8 @@ public class Inicio extends javax.swing.JFrame {
     private void jButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesionActionPerformed
         RegistoUsuario registroU = new RegistoUsuario();
         registroU.setVisible(false);
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.setVisible(true);
+        LoginUsuario login = new LoginUsuario();
+        login.setVisible(true);
         this.setVisible(false);
         
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed

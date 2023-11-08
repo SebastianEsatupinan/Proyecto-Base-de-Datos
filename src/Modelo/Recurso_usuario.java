@@ -6,7 +6,7 @@ import java.util.Date;
 public class Recurso_usuario {
 
     private String codigo_rec_usu;
-    private Date fecha_hora;
+    private LocalDateTime fecha_hora;
     private String comentario;
 
     public Recurso_usuario() {
@@ -14,9 +14,9 @@ public class Recurso_usuario {
 
     public Recurso_usuario(String codigo_rec_usu, LocalDateTime fecha_hora, String comentario) {
         this.codigo_rec_usu = codigo_rec_usu;
+        this.fecha_hora = fecha_hora;
         this.comentario = comentario;
     }
-
 
     public String getComentario() {
         return comentario;
@@ -34,13 +34,15 @@ public class Recurso_usuario {
         this.codigo_rec_usu = codigo_rec_usu;
     }
 
-    public Date getFecha_hora() {
+    public LocalDateTime getFecha_hora() {
         return fecha_hora;
     }
 
-    public void setFecha_hora(Date fecha_hora) {
+    public void setFecha_hora(LocalDateTime fecha_hora) {
         this.fecha_hora = fecha_hora;
     }
+
+   
 
     @Override
     public String toString() {

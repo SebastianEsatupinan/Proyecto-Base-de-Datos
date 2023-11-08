@@ -498,8 +498,8 @@ public class RegistoUsuario extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Error al registrar");
     }
     
-    Recurso Recc = new Recurso();
-    Recc.setVisible(true);
+    MenuPrincipal menu = new MenuPrincipal();
+    menu.setVisible(true);
     // Cerrar la ventana actual
     this.setVisible(false);
     }//GEN-LAST:event_jButtonInsertarUActionPerformed

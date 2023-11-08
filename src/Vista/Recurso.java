@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -19,7 +20,7 @@ import javax.swing.JOptionPane;
 public class Recurso extends javax.swing.JFrame { 
    
     Recurso_usuario objRecurso;
-    ArrayList<Recurso_usuario> ListaUsuarios;
+    ArrayList<Recurso_usuario> ListaRecursos;
     
     public Recurso() {
         initComponents();
@@ -246,4 +247,29 @@ public class Recurso extends javax.swing.JFrame {
     private javax.swing.JTextField textFieldC;
     private javax.swing.JTextField textFieldComentario;
     // End of variables declaration//GEN-END:variables
+
+    public Recurso_usuario getObjRecurso() {
+        return objRecurso;
+    }
+
+    public void setObjRecurso(Recurso_usuario objRecurso) {
+        this.objRecurso = objRecurso;
+    }
+
+    public JTextField getTextFieldC() {
+        return textFieldC;
+    }
+
+    public void setTextFieldC(JTextField textFieldC) {
+        this.textFieldC = textFieldC;
+    }
+
+    public JTextField getTextFieldComentario() {
+        return textFieldComentario;
+    }
+
+    public void setTextFieldComentario(JTextField textFieldComentario) {
+        this.textFieldComentario = textFieldComentario;
+    }
+
 }

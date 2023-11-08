@@ -1,16 +1,22 @@
 package Controlador;
 
 import Modelo.Establecimiento;
+import Modelo.Recurso_educativo;
 import Modelo.Recurso_usuario;
 import Modelo.Ubicacion;
 import Modelo.Usuario;
+import Vista.Recurso_Educativo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class ConexionBD {
-    private Connection connection;
+    public Connection connection;
     
     public ConexionBD() {
         // Establece la conexión a la base de datos
@@ -58,15 +64,33 @@ public class ConexionBD {
 
 
     public boolean insertarRecurso(Recurso_usuario objRecurso) {
-       try {
+        try {
             String queryRecurso = "INSERT INTO recurso_usuario (codigo, fecha, comentario) VALUES (?, ?, ?)";
-            
+
             PreparedStatement statementRecurso = connection.prepareStatement(queryRecurso);
-            //statementRecurso.setString(1, Recurso_usuario.getCod());
-            //statementRecurso.setTimestamp(2, Timestamp.valueOf(recurso.getFecha()));
-            //statementRecurso.setString(3, recurso.getComentario());
-            //statementRecurso.executeUpdate();
-            
+            statementRecurso.setString(1, objRecurso.getCodigo_rec_usu()); // Usar el método getCodigo_rec_usu() de objRecurso
+            statementRecurso.setTimestamp(2, Timestamp.valueOf(objRecurso.getFecha_hora())); // Usar el método getFecha_hora() de objRecurso
+            statementRecurso.setString(3, objRecurso.getComentario()); // Usar el método getComentario() de objRecurso
+            statementRecurso.executeUpdate();
+
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean insertarRecursoEd(Recurso_educativo objRecursoEd) {
+       try {
+        String queryRecursoEd = "INSERT INTO recurso_educativo (codigo_rec_ed, fecha_cargp, tipo_rec_ed) VALUES (?, ?, ?)";
+        
+        PreparedStatement statementRecursoEd = connection.prepareStatement(queryRecursoEd);
+        statementRecursoEd.setString(1, objRecursoEd.getCodigo_rec_ed()); // Usar el método getCodigo_rec_ed() de objRecursoEd
+        statementRecursoEd.setTimestamp(2, Timestamp.valueOf(objRecursoEd.getFecha_cargp())); // Usar el método getFecha_cargp() de objRecursoEd
+        statementRecursoEd.setString(3, objRecursoEd.getTipo_rec_ed()); // Usar el método getTipo_rec_ed() de objRecursoEd
+        statementRecursoEd.executeUpdate();
+        
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,5 +107,4 @@ public class ConexionBD {
             e.printStackTrace();
         }
     }
-
 }

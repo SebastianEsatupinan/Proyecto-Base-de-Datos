@@ -4,6 +4,6 @@ CREATE TABLE IF NOT EXISTS ubicacion (
     ciudad VARCHAR(255) NOT NULL,
     barrio VARCHAR(255) NOT NULL,
     departamento VARCHAR(255) NOT NULL,
-    descripcion TEXT NOT NULL
+    descripcion TEXT
 );
 
