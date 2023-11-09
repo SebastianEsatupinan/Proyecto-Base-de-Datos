@@ -39,11 +39,8 @@ public class ConexionBD {
     
     public boolean insertarUsuario(Usuario usuario, Ubicacion ubicacion, Establecimiento establecimiento) {
         try {
-            String queryUsuario = "INSERT INTO usuarios (id_usuario, nombre_usuario, edad, estrato, ubicacion_id) VALUES (?, ?, ?, ?, ?)";
-            String queryUbicacion = "INSERT INTO ubicacion (codigo_ubi, ciudad, barrio, departamento, descripcion) VALUES (?, ?, ?, ?, ?)";
-            String queryEstablecimiento = "INSERT INTO establecimiento (nit, nombre_estab, tipo, id_usuario) VALUES (?, ?, ? ,?)";
- 
             
+            String queryUsuario = "INSERT INTO usuarios (id_usuario, nombre_usuario, edad, estrato) VALUES (?, ?, ?, ?)";
             PreparedStatement statementUsuario = connection.prepareStatement(queryUsuario);
             statementUsuario.setInt(1, usuario.getId_usuario());
             statementUsuario.setString(2, usuario.getNombre_completo());
@@ -51,15 +48,18 @@ public class ConexionBD {
             statementUsuario.setString(4, usuario.getEstrato());
             statementUsuario.executeUpdate();
             
+            String queryUbicacion = "INSERT INTO ubicacion (codigo_ubi, ciudad, barrio, departamento, descripcion, codigoU) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement statementUbicacion = connection.prepareStatement(queryUbicacion);
             statementUbicacion.setInt(1, ubicacion.getCodigo());
             statementUbicacion.setString(2, ubicacion.getCiudad());
             statementUbicacion.setString(3, ubicacion.getBarrio());
             statementUbicacion.setString(4, ubicacion.getDepartamento());
             statementUbicacion.setString(5, ubicacion.getDescripcion());
-            statementUsuario.setInt(6, ubicacion.getCodeUsu());
+            statementUbicacion.setInt(6, ubicacion.getCodeUsu());
             statementUbicacion.executeUpdate();
 
+            
+            String queryEstablecimiento = "INSERT INTO establecimiento (nit, nombre_estab, tipo, id_usuario) VALUES (?, ?, ? ,?)";
             PreparedStatement statementEstablecimiento = connection.prepareStatement(queryEstablecimiento);
             statementEstablecimiento.setString(1, establecimiento.getNit());
             statementEstablecimiento.setString(2, establecimiento.getNombre_estab());
