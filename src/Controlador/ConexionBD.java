@@ -95,10 +95,10 @@ public class ConexionBD {
     
     public DefaultTableModel obtenerDatosUsuarios() {
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID");
-        model.addColumn("Nombre");
-        model.addColumn("Edad");
-        model.addColumn("Estrato");
+        model.addColumn("id_usuario");
+        model.addColumn("nombre_usuario");
+        model.addColumn("edad");
+        model.addColumn("estrato");
         
 
         try {
@@ -107,8 +107,8 @@ public class ConexionBD {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                String id = resultSet.getString("id");
-                String nombre = resultSet.getString("nombre");
+                String id = resultSet.getString("id_usuario");
+                String nombre = resultSet.getString("nombre_usuario");
                 String edad = resultSet.getString("edad");
                 String estrato = resultSet.getString("estrato");
                 

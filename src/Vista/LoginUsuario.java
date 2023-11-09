@@ -58,6 +58,12 @@ public class LoginUsuario extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Ingrese Cedula:");
 
+        ValidacionCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ValidacionCedulaActionPerformed(evt);
+            }
+        });
+
         jButtonVolver.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +145,10 @@ public class LoginUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No estás registrado", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonIniciarActionPerformed
+
+    private void ValidacionCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValidacionCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ValidacionCedulaActionPerformed
 
     /**
      * @param args the command line arguments

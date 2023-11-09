@@ -82,17 +82,17 @@ public class datosIngresados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-// Crear una instancia de la clase ConexionBD
-ConexionBD conexion = new ConexionBD();
+        // Crear una instancia de la clase ConexionBD
+        ConexionBD conexion = new ConexionBD();
 
-// Obtener el modelo de datos de la tabla usuarios
-DefaultTableModel modeloUsuarios = conexion.obtenerDatosUsuarios();
+        // Obtener el modelo de datos de la tabla usuarios
+        DefaultTableModel modeloUsuarios = conexion.obtenerDatosUsuarios();
 
-// Asignar el modelo a tu JTable
-jTable1.setModel(modeloUsuarios);
+        // Asignar el modelo a tu JTable
+        jTable1.setModel(modeloUsuarios);
 
-// Cerrar la conexión cuando ya no se necesite
-conexion.cerrarConexion();        // TODO add your handling code here:
+        // Cerrar la conexión cuando ya no se necesite
+        conexion.cerrarConexion();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
