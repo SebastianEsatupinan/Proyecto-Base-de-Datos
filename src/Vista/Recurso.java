@@ -21,10 +21,16 @@ public class Recurso extends javax.swing.JFrame {
    
     Recurso_usuario objRecurso;
     ArrayList<Recurso_usuario> ListaRecursos;
+    private String idUsuarioValidado;
     
-    public Recurso() {
+    public Recurso(String idUsuarioValidado) {
+        this.idUsuarioValidado = idUsuarioValidado;
         initComponents();
         objRecurso = new Recurso_usuario();
+    }
+
+    Recurso() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @SuppressWarnings("unchecked")
@@ -38,8 +44,7 @@ public class Recurso extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         textFieldComentario = new javax.swing.JTextField();
         Volver = new javax.swing.JButton();
-        guardar = new javax.swing.JButton();
-        recursoEducativo = new javax.swing.JButton();
+        BottonSiguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,19 +107,11 @@ public class Recurso extends javax.swing.JFrame {
             }
         });
 
-        guardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        guardar.setText("Guardar");
-        guardar.addActionListener(new java.awt.event.ActionListener() {
+        BottonSiguiente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        BottonSiguiente.setText("Guardar");
+        BottonSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarActionPerformed(evt);
-            }
-        });
-
-        recursoEducativo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        recursoEducativo.setText("Recurso Educativo");
-        recursoEducativo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recursoEducativoActionPerformed(evt);
+                BottonSiguienteActionPerformed(evt);
             }
         });
 
@@ -124,15 +121,13 @@ public class Recurso extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
+                .addContainerGap(77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(recursoEducativo)
-                        .addGap(19, 19, 19))
+                        .addGap(26, 26, 26)
+                        .addComponent(BottonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46))))
@@ -146,8 +141,7 @@ public class Recurso extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(recursoEducativo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BottonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -159,25 +153,21 @@ public class Recurso extends javax.swing.JFrame {
         //////////////////////////
     }//GEN-LAST:event_textFieldCActionPerformed
 
-    private void recursoEducativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recursoEducativoActionPerformed
-        Recurso_Educativo RedEd = new Recurso_Educativo();
-        RedEd.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_recursoEducativoActionPerformed
-
-    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        String codigoRecurso = textFieldC.getText();
+    private void BottonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BottonSiguienteActionPerformed
+        int codigoRecurso = Integer.parseInt(textFieldC.getText());
         LocalDateTime fecha = LocalDateTime.now();
         String ComentarioRecu = textFieldC.getText();
+        int codigoUsuario = Integer.parseInt(idUsuarioValidado);
         
         // Validar que los campos no estén vacíos
-        if (codigoRecurso.isEmpty() || ComentarioRecu.isEmpty()){
+        String ValidarCodigo = textFieldC.getText();
+        if (ValidarCodigo.isEmpty() || ComentarioRecu.isEmpty()){
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios. Por favor, llene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
     
         
-        objRecurso = new Recurso_usuario(codigoRecurso, fecha,ComentarioRecu);
+        objRecurso = new Recurso_usuario(codigoRecurso, fecha,ComentarioRecu, codigoUsuario);
         System.out.println(objRecurso);
         
         // BD conexión
@@ -186,13 +176,16 @@ public class Recurso extends javax.swing.JFrame {
 
         if (exito) {
             JOptionPane.showMessageDialog(this, "Registro exitoso");
+            Recurso_Educativo RedEd = new Recurso_Educativo();
+            RedEd.setVisible(true);
+            this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(this, "Error al registrar");
-        }
-    }//GEN-LAST:event_guardarActionPerformed
+        }  
+    }//GEN-LAST:event_BottonSiguienteActionPerformed
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-        MenuPrincipal menu = new MenuPrincipal();
+        MenuPrincipal menu = new MenuPrincipal(idUsuarioValidado);
         menu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VolverActionPerformed
@@ -237,13 +230,12 @@ public class Recurso extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BottonSiguiente;
     private javax.swing.JButton Volver;
-    private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton recursoEducativo;
     private javax.swing.JTextField textFieldC;
     private javax.swing.JTextField textFieldComentario;
     // End of variables declaration//GEN-END:variables
