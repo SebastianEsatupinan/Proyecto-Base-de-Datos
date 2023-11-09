@@ -34,6 +34,8 @@ public class datosIngresados extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,28 +56,41 @@ public class datosIngresados extends javax.swing.JFrame {
             }
         });
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "codigo", "ciudad", "barrio", "departamento", "descripcion"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(157, 157, 157))))
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(388, 388, 388)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(118, 118, 118)
                 .addComponent(jButton1)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         pack();
@@ -83,16 +98,26 @@ public class datosIngresados extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Crear una instancia de la clase ConexionBD
-        ConexionBD conexion = new ConexionBD();
+       ConexionBD conexion = new ConexionBD();
 
-        // Obtener el modelo de datos de la tabla usuarios
-        DefaultTableModel modeloUsuarios = conexion.obtenerDatosUsuarios();
+    // Obtener el modelo de datos de la tabla usuarios
+    DefaultTableModel modeloUsuarios = conexion.obtenerDatosUsuarios();
 
-        // Asignar el modelo a tu JTable
-        jTable1.setModel(modeloUsuarios);
+    // Asignar el modelo a jTable1
+    jTable1.setModel(modeloUsuarios);
 
-        // Cerrar la conexión cuando ya no se necesite
-        conexion.cerrarConexion();        // TODO add your handling code here:
+    // Cerrar la conexión cuando ya no se necesite
+    conexion.cerrarConexion();
+
+    // Obtener el ID del usuario seleccionado en jTable1
+    int filaSeleccionada = jTable1.getSelectedRow();
+
+    if (filaSeleccionada != -1) {
+        int idUsuarioSeleccionado = (int) jTable1.getValueAt(filaSeleccionada, 0); // Suponiendo que el ID del usuario está en la primera columna
+
+        // Llamar al método para mostrar datos de ubicación en jTable2
+        conexion.mostrarUbicacionPorUsuario(idUsuarioSeleccionado, jTable2);
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -133,7 +158,9 @@ public class datosIngresados extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 
     public JTable getjTable1() {

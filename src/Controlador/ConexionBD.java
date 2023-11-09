@@ -122,7 +122,43 @@ public class ConexionBD {
         }
 
         return model;
+        
+        
+        //Ubicacion
     }
+    public void mostrarUbicacionPorUsuario(int idUsuario, JTable jTable) {
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("Código");
+    model.addColumn("Ciudad");
+    model.addColumn("Barrio");
+    model.addColumn("Departamento");
+    model.addColumn("Descripción");
+
+    try {
+        String query = "SELECT * FROM ubicacion WHERE codigoU = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, idUsuario);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            int codigo = resultSet.getInt("codigo_ubi");
+            String ciudad = resultSet.getString("ciudad");
+            String barrio = resultSet.getString("barrio");
+            String departamento = resultSet.getString("departamento");
+            String descripcion = resultSet.getString("descripcion");
+
+            model.addRow(new Object[] {codigo, ciudad, barrio, departamento, descripcion});
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    jTable.setModel(model);
+}
+    
+    
+    
+    
     public void probar(){
         datosIngresados datos = new datosIngresados();
         // Crear una instancia de la clase ConexionBD
