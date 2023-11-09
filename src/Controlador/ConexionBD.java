@@ -8,6 +8,7 @@ import Modelo.Registro_reciclaje;
 import Modelo.Ubicacion;
 import Modelo.Usuario;
 import Vista.Recurso_Educativo;
+import Vista.datosIngresados;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -98,6 +99,7 @@ public class ConexionBD {
         model.addColumn("Nombre");
         model.addColumn("Edad");
         model.addColumn("Estrato");
+        
 
         try {
             String query = "SELECT * FROM usuarios";
@@ -113,13 +115,28 @@ public class ConexionBD {
              
 
                 model.addRow(new Object[] {id, nombre, edad, estrato});
-                System.out.println(model);
+               
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return model;
+    }
+    public void probar(){
+        datosIngresados datos = new datosIngresados();
+        // Crear una instancia de la clase ConexionBD
+ConexionBD conexion = new ConexionBD();
+
+// Obtener el modelo de datos de la tabla usuarios
+DefaultTableModel modeloUsuarios = conexion.obtenerDatosUsuarios();
+
+// Asignar el modelo a tu JTable
+datos.jTable1.setModel(modeloUsuarios);
+
+
+// Cerrar la conexión cuando ya no se necesite
+conexion.cerrarConexion();
     }
     
     

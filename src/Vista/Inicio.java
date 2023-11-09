@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.ConexionBD;
+
 public class Inicio extends javax.swing.JFrame {
 
     public Inicio() {
@@ -97,6 +99,10 @@ public class Inicio extends javax.swing.JFrame {
         datosIngresados datos = new datosIngresados();
         datos.setVisible(true);
         
+        ConexionBD con = new ConexionBD();
+        con.probar();
+        
+        
                 
     }//GEN-LAST:event_MostrarDatosActionPerformed
 
@@ -141,4 +147,5 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRegistrarse;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
 }
