@@ -8,11 +8,17 @@ import javax.swing.ImageIcon;
 public class MenuPrincipal extends javax.swing.JFrame {
     private File[] imageFiles;  // Lista de archivos de imágenes
     private Random random = new Random();
+    private String idUsuarioValidado;
 
-    public MenuPrincipal() {      
+    public MenuPrincipal(String idUsuarioValidado) {
+        this.idUsuarioValidado = idUsuarioValidado;
         initComponents();
         loadImagesFromFolder("src/Imagenes");  // Reemplaza esto con la ruta de tu carpeta de imágenes
         displayRandomImage();
+    }
+
+    MenuPrincipal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     // Cargar imágenes desde la carpeta
@@ -126,13 +132,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        RegistoReciclaje registroR = new RegistoReciclaje();
+        RegistoReciclaje registroR = new RegistoReciclaje(idUsuarioValidado);
         registroR.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Recurso recurso = new Recurso();
+        Recurso recurso = new Recurso(idUsuarioValidado);
         recurso.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -296,7 +296,7 @@ public class RegistoReciclaje extends javax.swing.JFrame {
 
         objRegistro = new Registro_reciclaje(codigoRegistro, Rutaimagen, retroalimentacion, codigoUsuario);
         Rutaimagen="";
-        JOptionPane.showMessageDialog(rootPane, "Se agregó el producto");
+        JOptionPane.showMessageDialog(rootPane, "Se agregó el Registro");
         
         objMaterial = new Material(codigo_mate,nombre_mate,tipo_mate,cantidad,recomendaciones, codigoRegistro);
         
@@ -339,7 +339,7 @@ public class RegistoReciclaje extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIsertarImagenActionPerformed
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
-        MenuPrincipal menu = new MenuPrincipal();
+        MenuPrincipal menu = new MenuPrincipal(idUsuarioValidado);
         menu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonVolverActionPerformed

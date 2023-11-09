@@ -135,9 +135,8 @@ public class LoginUsuario extends javax.swing.JFrame {
 
         if (usuarioValido) {
             idUsuarioValidado = cedula;
-            // Pasar la id_usuario a la ventana RegistoReciclaje
-            RegistoReciclaje registoReciclaje = new RegistoReciclaje(idUsuarioValidado);
-            registoReciclaje.setVisible(true);
+            MenuPrincipal menu = new MenuPrincipal(idUsuarioValidado);
+            menu.setVisible(true);
             this.setVisible(false);
         } else {
             // Si el usuario no es válido, mostrar un mensaje de error

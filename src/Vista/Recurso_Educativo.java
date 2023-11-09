@@ -136,8 +136,8 @@ public class Recurso_Educativo extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextTipoRecEduActionPerformed
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-        Recurso Rec = new Recurso();
-        Rec.setVisible(true);
+        LoginUsuario log = new LoginUsuario();
+        log.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VolverActionPerformed
 

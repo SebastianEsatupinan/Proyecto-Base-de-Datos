@@ -395,7 +395,24 @@ public class RegistoUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextEstratoActionPerformed
 
     private void jButtonInsertarUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarUActionPerformed
-    
+    // Obtener el texto del campo de texto
+   String textoID = jTextID.getText();
+
+   // Validación 1: Verificar si el campo está vacío
+   if (textoID.isEmpty()) {
+       JOptionPane.showMessageDialog(null, "Todos los campos menos Descripcion son obligatorios. Por favor, llene los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+   } else {
+       try {
+           // Validación 2: Intentar convertir el texto en un número entero
+           int id_usuario = Integer.parseInt(textoID);
+           // Si la conversión es exitosa, puedes usar el valor de id_usuario aquí
+           // ...
+       } catch (NumberFormatException e) {
+           // Si el texto no es un número entero, mostrar un mensaje de error
+           JOptionPane.showMessageDialog(null, "El ID debe ser un número entero válido.", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+   }    
+        
     // USUARIO
     int id_usuario = Integer.parseInt(jTextID.getText());
     String nombre_completo = jTextNombre.getText();
@@ -415,9 +432,7 @@ public class RegistoUsuario extends javax.swing.JFrame {
     String tipo = jTextTipo.getText();
     
     // Validar que los campos no estén vacíos
-    String idValid = jTextID.getText();
-    if (    idValid.isEmpty()
-            ||nombre_completo.isEmpty() 
+    if (    nombre_completo.isEmpty() 
             || edad.isEmpty() 
             || estrato.isEmpty()
             || ciudad.isEmpty() 
@@ -426,17 +441,7 @@ public class RegistoUsuario extends javax.swing.JFrame {
             || nit.isEmpty() 
             || nombreEstablecimiento.isEmpty() 
             || tipo.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios. Por favor, llene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    
-    // Validar que el ID del usuario sea un número entero
-    String idUsuarioString = jTextID.getText();
-    try {
-        int idUsuario = Integer.parseInt(idUsuarioString);
-        // Si llega a este punto, el ID del usuario es un número entero
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "El ID del usuario debe ser un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Todos los campos menos Descripcion son obligatorios. Por favor, llene los campos.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
     

@@ -26,21 +26,22 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class ConexionBD {
+
     public Connection connection;
-    
+
     public ConexionBD() {
         // Establece la conexión a la base de datos
         try {
-            Class.forName("com.mysql.jdbc.Driver"); 
+            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost/Prueba", "root", "root");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     public boolean insertarUsuario(Usuario usuario, Ubicacion ubicacion, Establecimiento establecimiento) {
         try {
-            
+
             String queryUsuario = "INSERT INTO usuarios (id_usuario, nombre_usuario, edad, estrato) VALUES (?, ?, ?, ?)";
             PreparedStatement statementUsuario = connection.prepareStatement(queryUsuario);
             statementUsuario.setInt(1, usuario.getId_usuario());
@@ -48,7 +49,7 @@ public class ConexionBD {
             statementUsuario.setString(3, usuario.getEdad());
             statementUsuario.setString(4, usuario.getEstrato());
             statementUsuario.executeUpdate();
-            
+
             String queryUbicacion = "INSERT INTO ubicacion (codigo_ubi, ciudad, barrio, departamento, descripcion, codigoU) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement statementUbicacion = connection.prepareStatement(queryUbicacion);
             statementUbicacion.setInt(1, ubicacion.getCodigo());
@@ -59,7 +60,6 @@ public class ConexionBD {
             statementUbicacion.setInt(6, ubicacion.getCodeUsu());
             statementUbicacion.executeUpdate();
 
-            
             String queryEstablecimiento = "INSERT INTO establecimiento (nit, nombre_estab, tipo, id_usuario) VALUES (?, ?, ? ,?)";
             PreparedStatement statementEstablecimiento = connection.prepareStatement(queryEstablecimiento);
             statementEstablecimiento.setString(1, establecimiento.getNit());
@@ -67,7 +67,7 @@ public class ConexionBD {
             statementEstablecimiento.setString(3, String.valueOf(establecimiento.getTipo_estab()));
             statementEstablecimiento.setInt(4, establecimiento.getCodUsu());
             statementEstablecimiento.executeUpdate();
-            
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,14 +77,14 @@ public class ConexionBD {
 
     public boolean insertarRecurso(Recurso_usuario objRecurso) {
         try {
-            String queryRecurso = "INSERT INTO recurso_usuario (codigo, fecha, comentario) VALUES (?, ?, ?)";
+            String queryRecurso = "INSERT INTO recurso_usuario (codigo_Recurso, fecha, comentario, usuario_id) VALUES (?, ?, ?, ?)";
 
             PreparedStatement statementRecurso = connection.prepareStatement(queryRecurso);
-            statementRecurso.setString(1, objRecurso.getCodigo_rec_usu()); // Usar el método getCodigo_rec_usu() de objRecurso
-            statementRecurso.setTimestamp(2, Timestamp.valueOf(objRecurso.getFecha_hora())); // Usar el método getFecha_hora() de objRecurso
-            statementRecurso.setString(3, objRecurso.getComentario()); // Usar el método getComentario() de objRecurso
+            statementRecurso.setInt(1, objRecurso.getCodigo_rec_usu()); 
+            statementRecurso.setTimestamp(2, Timestamp.valueOf(objRecurso.getFecha_hora())); 
+            statementRecurso.setString(3, objRecurso.getComentario()); 
+            statementRecurso.setInt(4, objRecurso.getIDUsuario());
             statementRecurso.executeUpdate();
-
 
             return true;
         } catch (SQLException e) {
@@ -92,14 +92,13 @@ public class ConexionBD {
             return false;
         }
     }
-    
+
     public DefaultTableModel obtenerDatosUsuarios() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("id_usuario");
         model.addColumn("nombre_usuario");
         model.addColumn("edad");
         model.addColumn("estrato");
-        
 
         try {
             String query = "SELECT * FROM usuarios";
@@ -111,11 +110,9 @@ public class ConexionBD {
                 String nombre = resultSet.getString("nombre_usuario");
                 String edad = resultSet.getString("edad");
                 String estrato = resultSet.getString("estrato");
-                
-             
 
-                model.addRow(new Object[] {id, nombre, edad, estrato});
-               
+                model.addRow(new Object[]{id, nombre, edad, estrato});
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,41 +120,38 @@ public class ConexionBD {
         return model;
         //Ubicacion
     }
-    
+
     public void mostrarUbicacionPorUsuario(int idUsuario, JTable jTable) {
-    DefaultTableModel model = new DefaultTableModel();
-    model.addColumn("codigo_ubi");
-    model.addColumn("ciudad");
-    model.addColumn("barrio");
-    model.addColumn("departamento");
-    model.addColumn("descripcion");
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("codigo_ubi");
+        model.addColumn("ciudad");
+        model.addColumn("barrio");
+        model.addColumn("departamento");
+        model.addColumn("descripcion");
 
-    try {
-        String query = "SELECT * FROM ubicacion";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, idUsuario);
-        ResultSet resultSet = statement.executeQuery();
+        try {
+            String query = "SELECT * FROM ubicacion";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, idUsuario);
+            ResultSet resultSet = statement.executeQuery();
 
-        while (resultSet.next()) {
-            int codigo = resultSet.getInt("codigo_ubi");
-            String ciudad = resultSet.getString("ciudad");
-            String barrio = resultSet.getString("barrio");
-            String departamento = resultSet.getString("departamento");
-            String descripcion = resultSet.getString("descripcion");
+            while (resultSet.next()) {
+                int codigo = resultSet.getInt("codigo_ubi");
+                String ciudad = resultSet.getString("ciudad");
+                String barrio = resultSet.getString("barrio");
+                String departamento = resultSet.getString("departamento");
+                String descripcion = resultSet.getString("descripcion");
 
-            model.addRow(new Object[] {codigo, ciudad, barrio, departamento, descripcion});
+                model.addRow(new Object[]{codigo, ciudad, barrio, departamento, descripcion});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+
+        jTable.setModel(model);
     }
 
-    jTable.setModel(model);
-}
-    
-    
-    
-    
-    public void probar(){
+    public void probar() {
         datosIngresados datos = new datosIngresados();
         // Crear una instancia de la clase ConexionBD
         ConexionBD conexion = new ConexionBD();
@@ -168,84 +162,80 @@ public class ConexionBD {
         // Asignar el modelo a tu JTable
         datos.jTable1.setModel(modeloUsuarios);
 
-
         // Cerrar la conexión cuando ya no se necesite
         conexion.cerrarConexion();
     }
-    
-    
+
     public boolean insertarRecursoEd(Recurso_educativo objRecursoEd) {
-       try {
+        try {
             String queryRecursoEd = "INSERT INTO recurso_educativo (codigo_rec_ed, fecha_cargp, tipo_rec_ed) VALUES (?, ?, ?)";
-        
+
             PreparedStatement statementRecursoEd = connection.prepareStatement(queryRecursoEd);
             statementRecursoEd.setString(1, objRecursoEd.getCodigo_rec_ed()); // Usar el método getCodigo_rec_ed() de objRecursoEd
             statementRecursoEd.setTimestamp(2, Timestamp.valueOf(objRecursoEd.getFecha_cargp())); // Usar el método getFecha_cargp() de objRecursoEd
             statementRecursoEd.setString(3, objRecursoEd.getTipo_rec_ed()); // Usar el método getTipo_rec_ed() de objRecursoEd
             statementRecursoEd.executeUpdate();
-        
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
-    
-    public boolean insertarRegistroReciclaje(Registro_reciclaje objRegistro, Material objMaterial) throws FileNotFoundException, IOException{
+
+    public boolean insertarRegistroReciclaje(Registro_reciclaje objRegistro, Material objMaterial) throws FileNotFoundException, IOException {
         FileInputStream fis = null;
-        PreparedStatement ps = null;
+        PreparedStatement psRegistro = null;
+        PreparedStatement psMaterial = null;
 
         try {
-            String sqlInsert = "INSERT INTO registro_reciclaje (codigo_regis, imagen, retroalimentacion, usuario_id) VALUES (?, ?, ?, ?)";
-            connection.setAutoCommit(false);
-            ps = connection.prepareStatement(sqlInsert);
-            ps.setInt(1, objRegistro.getCodigo_regis());
-            ps.setString(3, objRegistro.getRetroalimentacion());
-            ps.setInt(4, objRegistro.getCedulaUsu());
-            
-           if (!objRegistro.getImagen().equals("")) {
+            String sqlInsertRegistro = "INSERT INTO registro_reciclaje (codigo_regis, imagen, retroalimentacion, usuario_id) VALUES (?, ?, ?, ?)";
+            psRegistro = connection.prepareStatement(sqlInsertRegistro);
+            psRegistro.setInt(1, objRegistro.getCodigo_regis());
+            psRegistro.setString(3, objRegistro.getRetroalimentacion());
+            psRegistro.setInt(4, objRegistro.getCedulaUsu());
+
+            if (!objRegistro.getImagen().equals("")) {
                 File file = new File(objRegistro.getImagen());
                 fis = new FileInputStream(file);
-                ps.setBinaryStream(2, fis, (int) file.length());
-                ps.executeUpdate();
-                ps.close();
-                fis.close();
+                psRegistro.setBinaryStream(2, fis, (int) file.length());
             } else {
-                ps.setNull(2, java.sql.Types.BLOB);
-                ps.executeUpdate();
-                ps.close();
+                psRegistro.setNull(2, Types.BLOB);
             }
-           
-            String queryMaterial = "INSERT INTO material (codigo_mate, nombre_mate, tipo_mate, cantidad, recomendaciones, codigo_regis) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement statementMaterial = connection.prepareStatement(queryMaterial);
-            statementMaterial.setInt(1, objMaterial.getCodigo_mate());
-            statementMaterial.setString(2, objMaterial.getNombre_mate());
-            statementMaterial.setString(3, objMaterial.getTipo_mate());
-            statementMaterial.setDouble(4, objMaterial.getCantidad());
-            statementMaterial.setString(5, objMaterial.getRecomendaciones());
-            statementMaterial.setInt(6, objMaterial.getCodRegis());
-            statementMaterial.executeUpdate();
 
-            ps.executeUpdate();
-            connection.commit();
+            psRegistro.executeUpdate();
+
+            String sqlInsertMaterial = "INSERT INTO material (codigo_mate, nombre_mate, tipo_mate, cantidad, recomendaciones, codigo_regis) VALUES (?, ?, ?, ?, ?, ?)";
+            psMaterial = connection.prepareStatement(sqlInsertMaterial);
+            psMaterial.setInt(1, objMaterial.getCodigo_mate());
+            psMaterial.setString(2, objMaterial.getNombre_mate());
+            psMaterial.setString(3, objMaterial.getTipo_mate());
+            psMaterial.setDouble(4, objMaterial.getCantidad());
+            psMaterial.setString(5, objMaterial.getRecomendaciones());
+            psMaterial.setInt(6, objRegistro.getCodigo_regis()); // Usar el código del registro reciclaje insertado anteriormente
+            psMaterial.executeUpdate();
+
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            return false;
         } finally {
             try {
                 if (fis != null) {
                     fis.close();
                 }
-                if (ps != null) {
-                    ps.close();
+                if (psRegistro != null) {
+                    psRegistro.close();
+                }
+                if (psMaterial != null) {
+                    psMaterial.close();
                 }
             } catch (IOException | SQLException ex) {
-                Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
-        }   
-        return false;
+        }
     }
-    
+
     public void cerrarConexion() {
         try {
             if (connection != null) {
@@ -255,6 +245,5 @@ public class ConexionBD {
             e.printStackTrace();
         }
     }
-
 
 }
