@@ -4,22 +4,22 @@
  * and open the template in the editor.
  */
 package Vista;
-
-import Controlador.ConexionBD;
-import javax.swing.table.DefaultTableModel;
-
+import Controlador.ConexionBD.TablaUsuarios;
 /**
  *
- * @author Darwin Criollo
+ * @author darwin.criollo
  */
 public class datosIngresados extends javax.swing.JFrame {
+private TablaUsuarios tablaUsuarios;
 
     /**
      * Creates new form datosIngresados
      */
-    public datosIngresados() {
-        initComponents();
-    }
+public datosIngresados() {
+    initComponents();
+    tablaUsuarios = new TablaUsuarios(jTable1); // Pasa la referencia de la tabla a la clase TablaUsuarios
+    tablaUsuarios.cargarDatosDesdeBaseDeDatos(); // Carga los datos al abrir la ventana
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,7 +32,6 @@ public class datosIngresados extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,58 +40,30 @@ public class datosIngresados extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "IID", "Nombre", "Edad", "Estrato"
+                "id", "nombre", "edad", "estrato"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(157, 157, 157))))
+                .addGap(52, 52, 52)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(jButton1)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-// Crear una instancia de la clase ConexionBD
-ConexionBD conexion = new ConexionBD();
-
-// Obtener el modelo de datos de la tabla usuarios
-DefaultTableModel modeloUsuarios = conexion.obtenerDatosUsuarios();
-
-// Asignar el modelo a tu JTable
-jTable1.setModel(modeloUsuarios);
-
-// Cerrar la conexión cuando ya no se necesite
-conexion.cerrarConexion();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,7 +101,6 @@ conexion.cerrarConexion();        // TODO add your handling code here:
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
