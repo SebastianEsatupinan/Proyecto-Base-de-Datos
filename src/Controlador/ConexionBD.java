@@ -109,8 +109,11 @@ public class ConexionBD {
                 String nombre = resultSet.getString("nombre");
                 String edad = resultSet.getString("edad");
                 String estrato = resultSet.getString("estrato");
+                
+             
 
                 model.addRow(new Object[] {id, nombre, edad, estrato});
+                System.out.println(model);
             }
         } catch (SQLException e) {
             e.printStackTrace();
