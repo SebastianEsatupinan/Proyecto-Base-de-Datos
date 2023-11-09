@@ -123,10 +123,9 @@ public class ConexionBD {
         return model;
         //Ubicacion
     }
-    
-    public void mostrarUbicacionPorUsuario(int idUsuario, JTable jTable) {
+    public DefaultTableModel obtenerDatosUbicacion() {
     DefaultTableModel model = new DefaultTableModel();
-    model.addColumn("codigo_ubi");
+    model.addColumn("codigo");
     model.addColumn("ciudad");
     model.addColumn("barrio");
     model.addColumn("departamento");
@@ -135,11 +134,10 @@ public class ConexionBD {
     try {
         String query = "SELECT * FROM ubicacion";
         PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, idUsuario);
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
-            int codigo = resultSet.getInt("codigo_ubi");
+            String codigo = resultSet.getString("codigo_ubi");
             String ciudad = resultSet.getString("ciudad");
             String barrio = resultSet.getString("barrio");
             String departamento = resultSet.getString("departamento");
@@ -151,27 +149,11 @@ public class ConexionBD {
         e.printStackTrace();
     }
 
-    jTable.setModel(model);
+    return model;
 }
-    
-    
-    
-    
-    public void probar(){
-        datosIngresados datos = new datosIngresados();
-        // Crear una instancia de la clase ConexionBD
-        ConexionBD conexion = new ConexionBD();
 
-        // Obtener el modelo de datos de la tabla usuarios
-        DefaultTableModel modeloUsuarios = conexion.obtenerDatosUsuarios();
+    
 
-        // Asignar el modelo a tu JTable
-        datos.jTable1.setModel(modeloUsuarios);
-
-
-        // Cerrar la conexión cuando ya no se necesite
-        conexion.cerrarConexion();
-    }
     
     
     public boolean insertarRecursoEd(Recurso_educativo objRecursoEd) {

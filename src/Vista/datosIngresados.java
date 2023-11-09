@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.ConexionBD;
+import Modelo.Ubicacion;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -97,8 +98,8 @@ public class datosIngresados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Crear una instancia de la clase ConexionBD
-       ConexionBD conexion = new ConexionBD();
+    // Crear una instancia de la clase ConexionBD
+    ConexionBD conexion = new ConexionBD();
 
     // Obtener el modelo de datos de la tabla usuarios
     DefaultTableModel modeloUsuarios = conexion.obtenerDatosUsuarios();
@@ -106,18 +107,25 @@ public class datosIngresados extends javax.swing.JFrame {
     // Asignar el modelo a jTable1
     jTable1.setModel(modeloUsuarios);
 
-    // Cerrar la conexión cuando ya no se necesite
-    conexion.cerrarConexion();
+    // Obtener el modelo de datos de la tabla ubicación
+    DefaultTableModel modeloUbicacion = conexion.obtenerDatosUbicacion();
+
+    // Asignar el modelo a jTable2
+    jTable2.setModel(modeloUbicacion);
 
     // Obtener el ID del usuario seleccionado en jTable1
     int filaSeleccionada = jTable1.getSelectedRow();
 
     if (filaSeleccionada != -1) {
-        int idUsuarioSeleccionado = (int) jTable1.getValueAt(filaSeleccionada, 0); // Suponiendo que el ID del usuario está en la primera columna
+        int idUsuarioSeleccionado = Integer.parseInt(jTable1.getValueAt(filaSeleccionada, 0).toString());
 
-        // Llamar al método para mostrar datos de ubicación en jTable2
-        conexion.mostrarUbicacionPorUsuario(idUsuarioSeleccionado, jTable2);
+        // Obtener la ubicación del usuario seleccionado
+        // Puedes acceder a los datos de ubicación a través de jTable2
+        // No es necesario realizar una consulta adicional en este punto
     }
+
+    // Cerrar la conexión cuando ya no se necesite
+    conexion.cerrarConexion();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -169,6 +177,16 @@ public class datosIngresados extends javax.swing.JFrame {
 
     public void setjTable1(JTable jTable1) {
         this.jTable1 = jTable1;
+        
+        
+    }
+
+    public JTable getjTable2() {
+        return jTable2;
+    }
+
+    public void setjTable2(JTable jTable2) {
+        this.jTable2 = jTable2;
     }
 
 }

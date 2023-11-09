@@ -100,7 +100,7 @@ public class Inicio extends javax.swing.JFrame {
         datos.setVisible(true);
         
         ConexionBD con = new ConexionBD();
-        con.probar();              
+                     
     }//GEN-LAST:event_MostrarDatosActionPerformed
 
     /**
