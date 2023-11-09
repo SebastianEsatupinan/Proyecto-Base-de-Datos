@@ -1,9 +1,10 @@
 CREATE TABLE IF NOT EXISTS ubicacion (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    codigo VARCHAR(50) NOT NULL,
+    codigo_ubi int(50) NOT NULL PRIMARY KEY,
     ciudad VARCHAR(255) NOT NULL,
     barrio VARCHAR(255) NOT NULL,
     departamento VARCHAR(255) NOT NULL,
-    descripcion TEXT
+    codigoU int not null,
+    descripcion TEXT,
+    FOREIGN KEY (codigoU) REFERENCES usuarios(id_usuario)
 );
 

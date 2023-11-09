@@ -2,36 +2,31 @@ package Modelo;
 
 public class Material {
     
-    private String codigo_mate;
+    private int codigo_mate;
     private String nombre_mate;
     private String tipo_mate;
     private double cantidad;
     private String recomendaciones;
-
+    private int codRegis;
+    
     public Material() {
+       
     }
 
-    public Material(String codigo_mate, String nombre_mate, String tipo_mate, double cantidad, String recomendaciones) {
+    public Material(int codigo_mate, String nombre_mate, String tipo_mate, double cantidad, String recomendaciones, int codRegis) {
         this.codigo_mate = codigo_mate;
         this.nombre_mate = nombre_mate;
         this.tipo_mate = tipo_mate;
         this.cantidad = cantidad;
         this.recomendaciones = recomendaciones;
+        this.codRegis = codRegis;
     }
 
-    public String getRecomendaciones() {
-        return recomendaciones;
-    }
-
-    public void setRecomendaciones(String recomendaciones) {
-        this.recomendaciones = recomendaciones;
-    }
-
-    public String getCodigo_mate() {
+    public int getCodigo_mate() {
         return codigo_mate;
     }
 
-    public void setCodigo_mate(String codigo_mate) {
+    public void setCodigo_mate(int codigo_mate) {
         this.codigo_mate = codigo_mate;
     }
 
@@ -59,10 +54,28 @@ public class Material {
         this.cantidad = cantidad;
     }
 
+    public String getRecomendaciones() {
+        return recomendaciones;
+    }
+
+    public void setRecomendaciones(String recomendaciones) {
+        this.recomendaciones = recomendaciones;
+    }
+
+    public int getCodRegis() {
+        return codRegis;
+    }
+
+    public void setCodRegis(int codRegis) {
+        this.codRegis = codRegis;
+    }
+
     @Override
     public String toString() {
-        return "Material{" + "codigo_mate=" + codigo_mate + ", nombre_mate=" + nombre_mate + ", tipo_mate=" + tipo_mate + ", cantidad=" + cantidad + ", recomendaciones=" + recomendaciones + '}';
+        return "Material{" + "codigo_mate=" + codigo_mate + ", nombre_mate=" + nombre_mate + ", tipo_mate=" + tipo_mate + ", cantidad=" + cantidad + ", recomendaciones=" + recomendaciones + ", codRegis=" + codRegis + '}';
     }
+
+    
     
     
 }

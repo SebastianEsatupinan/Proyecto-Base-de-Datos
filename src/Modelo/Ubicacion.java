@@ -1,36 +1,30 @@
 package Modelo;
 
 public class Ubicacion {
-    private String codigo;
+    private int codigo;
     private String ciudad;
     private String barrio;
     private String departamento;
     private String descripcion;
+    private int codeUsu;
 
     public Ubicacion() {
     }
 
-    public Ubicacion(String codigo, String ciudad, String barrio, String departamento, String descripcion) {
+    public Ubicacion(int codigo, String ciudad, String barrio, String departamento, String descripcion, int codeUsu) {
         this.codigo = codigo;
         this.ciudad = ciudad;
         this.barrio = barrio;
         this.departamento = departamento;
         this.descripcion = descripcion;
+        this.codeUsu = codeUsu;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
@@ -58,9 +52,26 @@ public class Ubicacion {
         this.departamento = departamento;
     }
 
-    @Override
-    public String toString() {
-        return "Ubicacion{" + "codigo=" + codigo + ", ciudad=" + ciudad + ", barrio=" + barrio + ", departamento=" + departamento + ", descripcion=" + descripcion + '}';
+    public String getDescripcion() {
+        return descripcion;
     }
 
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public int getCodeUsu() {
+        return codeUsu;
+    }
+
+    public void setCodeUsu(int codeUsu) {
+        this.codeUsu = codeUsu;
+    }
+
+    @Override
+    public String toString() {
+        return "Ubicacion{" + "codigo=" + codigo + ", ciudad=" + ciudad + ", barrio=" + barrio + ", departamento=" + departamento + ", descripcion=" + descripcion + ", codeUsu=" + codeUsu + '}';
+    }
+
+   
 }

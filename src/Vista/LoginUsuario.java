@@ -8,10 +8,12 @@ import javax.swing.JOptionPane;
 
 public class LoginUsuario extends javax.swing.JFrame {
     
+    private String idUsuarioValidado;
+  
     private boolean validarUsuarioEnBD(String cedula, ConexionBD conexionBD) {
         boolean usuarioValido = false;
         try {
-            String query = "SELECT * FROM usuarios WHERE cedula = ?";
+            String query = "SELECT * FROM usuarios WHERE id_usuario  = ?";
             PreparedStatement statement = conexionBD.connection.prepareStatement(query);
             statement.setString(1, cedula);
             ResultSet resultSet = statement.executeQuery();
@@ -30,9 +32,8 @@ public class LoginUsuario extends javax.swing.JFrame {
             // Asegúrate de cerrar la conexión después de usarla
             conexionBD.cerrarConexion();
         }
-
-    return usuarioValido;
-}
+        return usuarioValido;
+    }
 
 
     public LoginUsuario() {
@@ -128,10 +129,11 @@ public class LoginUsuario extends javax.swing.JFrame {
         conexionBD.cerrarConexion();
 
         if (usuarioValido) {
+            idUsuarioValidado = cedula;
             // Si el usuario es válido, abrir la siguiente ventana
             MenuPrincipal menu = new MenuPrincipal();
             menu.setVisible(true);
-            this.setVisible(false);
+//            this.setVisible(false);
         } else {
             // Si el usuario no es válido, mostrar un mensaje de error
             JOptionPane.showMessageDialog(this, "No estás registrado", "Error", JOptionPane.ERROR_MESSAGE);
@@ -180,5 +182,13 @@ public class LoginUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
+
+    public String getIdUsuarioValidado() {
+        return idUsuarioValidado;
+    }
+
+    public void setIdUsuarioValidado(String idUsuarioValidado) {
+        this.idUsuarioValidado = idUsuarioValidado;
+    }
 
 }
