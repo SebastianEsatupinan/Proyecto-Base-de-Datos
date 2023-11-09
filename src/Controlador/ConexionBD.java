@@ -92,6 +92,34 @@ public class ConexionBD {
         }
     }
     
+    public DefaultTableModel obtenerDatosUsuarios() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Nombre");
+        model.addColumn("Edad");
+        model.addColumn("Estrato");
+
+        try {
+            String query = "SELECT * FROM usuarios";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String nombre = resultSet.getString("nombre");
+                String edad = resultSet.getString("edad");
+                String estrato = resultSet.getString("estrato");
+
+                model.addRow(new Object[] {id, nombre, edad, estrato});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return model;
+    }
+    
+    
     public boolean insertarRecursoEd(Recurso_educativo objRecursoEd) {
        try {
             String queryRecursoEd = "INSERT INTO recurso_educativo (codigo_rec_ed, fecha_cargp, tipo_rec_ed) VALUES (?, ?, ?)";
