@@ -7,14 +7,16 @@ public class Registro_reciclaje {
     private int codigo_regis;
     private String imagen;
     private String retroalimentacion;
+    private int CedulaUsu;
 
     public Registro_reciclaje() {
     }
 
-    public Registro_reciclaje(int codigo_regis, String imagen, String retroalimentacion) {
+    public Registro_reciclaje(int codigo_regis, String imagen, String retroalimentacion, int CedulaUsu) {
         this.codigo_regis = codigo_regis;
         this.imagen = imagen;
         this.retroalimentacion = retroalimentacion;
+        this.CedulaUsu = CedulaUsu;
     }
 
     public int getCodigo_regis() {
@@ -41,11 +43,17 @@ public class Registro_reciclaje {
         this.retroalimentacion = retroalimentacion;
     }
 
-    @Override
-    public String toString() {
-        return "Registro_reciclaje{" + "codigo_regis=" + codigo_regis + ", imagen=" + imagen + ", retroalimentacion=" + retroalimentacion + '}';
+    public int getCedulaUsu() {
+        return CedulaUsu;
     }
 
-    
+    public void setCedulaUsu(int CedulaUsu) {
+        this.CedulaUsu = CedulaUsu;
+    }
+
+    @Override
+    public String toString() {
+        return "Registro_reciclaje{" + "codigo_regis=" + codigo_regis + ", imagen=" + imagen + ", retroalimentacion=" + retroalimentacion + ", CedulaUsu=" + CedulaUsu + '}';
+    }
    
 }

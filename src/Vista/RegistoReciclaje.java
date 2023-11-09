@@ -23,13 +23,19 @@ public class RegistoReciclaje extends javax.swing.JFrame {
     String Rutaimagen;   //borrar cuando no se utilizan imágenes 
     Registro_reciclaje objRegistro;
     Material objMaterial;
+    private String idUsuarioValidado;
     
-    public RegistoReciclaje() {
+    public RegistoReciclaje(String idUsuarioValidado) {
+        this.idUsuarioValidado = idUsuarioValidado;
         initComponents();
         objRegistro = new Registro_reciclaje();
         objMaterial = new Material();
         Rutaimagen="";
         
+    }
+
+    RegistoReciclaje() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @SuppressWarnings("unchecked")
@@ -272,6 +278,7 @@ public class RegistoReciclaje extends javax.swing.JFrame {
         double cantidad = Double.parseDouble(jTextCantidadMaterial.getText());
         String tipo_mate = (String) jComboBox1.getSelectedItem();
         String recomendaciones = jTextAreaRecomendaciones.getText();
+        int codigoUsuario = Integer.parseInt(idUsuarioValidado);
         
         try {
             cantidad = Double.parseDouble(jTextCantidadMaterial.getText());
@@ -287,7 +294,7 @@ public class RegistoReciclaje extends javax.swing.JFrame {
             return;
         }
 
-        objRegistro = new Registro_reciclaje(codigoRegistro, Rutaimagen, retroalimentacion);
+        objRegistro = new Registro_reciclaje(codigoRegistro, Rutaimagen, retroalimentacion, codigoUsuario);
         Rutaimagen="";
         JOptionPane.showMessageDialog(rootPane, "Se agregó el producto");
         

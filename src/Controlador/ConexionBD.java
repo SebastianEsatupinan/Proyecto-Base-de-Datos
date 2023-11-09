@@ -120,22 +120,20 @@ public class ConexionBD {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return model;
-        
-        
         //Ubicacion
     }
+    
     public void mostrarUbicacionPorUsuario(int idUsuario, JTable jTable) {
     DefaultTableModel model = new DefaultTableModel();
-    model.addColumn("Código");
-    model.addColumn("Ciudad");
-    model.addColumn("Barrio");
-    model.addColumn("Departamento");
-    model.addColumn("Descripción");
+    model.addColumn("codigo_ubi");
+    model.addColumn("ciudad");
+    model.addColumn("barrio");
+    model.addColumn("departamento");
+    model.addColumn("descripcion");
 
     try {
-        String query = "SELECT * FROM ubicacion WHERE codigoU = ?";
+        String query = "SELECT * FROM ubicacion";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, idUsuario);
         ResultSet resultSet = statement.executeQuery();
@@ -162,17 +160,17 @@ public class ConexionBD {
     public void probar(){
         datosIngresados datos = new datosIngresados();
         // Crear una instancia de la clase ConexionBD
-ConexionBD conexion = new ConexionBD();
+        ConexionBD conexion = new ConexionBD();
 
-// Obtener el modelo de datos de la tabla usuarios
-DefaultTableModel modeloUsuarios = conexion.obtenerDatosUsuarios();
+        // Obtener el modelo de datos de la tabla usuarios
+        DefaultTableModel modeloUsuarios = conexion.obtenerDatosUsuarios();
 
-// Asignar el modelo a tu JTable
-datos.jTable1.setModel(modeloUsuarios);
+        // Asignar el modelo a tu JTable
+        datos.jTable1.setModel(modeloUsuarios);
 
 
-// Cerrar la conexión cuando ya no se necesite
-conexion.cerrarConexion();
+        // Cerrar la conexión cuando ya no se necesite
+        conexion.cerrarConexion();
     }
     
     
@@ -193,26 +191,27 @@ conexion.cerrarConexion();
         }
     }
     
-    public boolean insertarRegistroReciclaje(Registro_reciclaje objRegistro, Material objMaterial) throws FileNotFoundException, IOException {
+    public boolean insertarRegistroReciclaje(Registro_reciclaje objRegistro, Material objMaterial) throws FileNotFoundException, IOException{
         FileInputStream fis = null;
         PreparedStatement ps = null;
 
         try {
-            String sqlInsert = "INSERT INTO registro_reciclaje (codigo_regis, imagen, retroalimentacion) VALUES (?, ?, ?)";
+            String sqlInsert = "INSERT INTO registro_reciclaje (codigo_regis, imagen, retroalimentacion, usuario_id) VALUES (?, ?, ?, ?)";
             connection.setAutoCommit(false);
             ps = connection.prepareStatement(sqlInsert);
             ps.setInt(1, objRegistro.getCodigo_regis());
             ps.setString(3, objRegistro.getRetroalimentacion());
-
-           if(!objRegistro.getImagen().equals("")){
+            ps.setInt(4, objRegistro.getCedulaUsu());
+            
+           if (!objRegistro.getImagen().equals("")) {
                 File file = new File(objRegistro.getImagen());
                 fis = new FileInputStream(file);
-                ps.setBinaryStream(5, fis, (int) file.length());
+                ps.setBinaryStream(2, fis, (int) file.length());
                 ps.executeUpdate();
                 ps.close();
-                fis.close(); //borrar si no hay imagen, audio o vídeo
-            } else{
-                ps.setString(5, null);
+                fis.close();
+            } else {
+                ps.setNull(2, java.sql.Types.BLOB);
                 ps.executeUpdate();
                 ps.close();
             }

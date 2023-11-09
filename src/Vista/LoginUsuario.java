@@ -129,17 +129,16 @@ public class LoginUsuario extends javax.swing.JFrame {
 
     private void jButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarActionPerformed
         String cedula = ValidacionCedula.getText();
-    
         ConexionBD conexionBD = new ConexionBD();
         boolean usuarioValido = validarUsuarioEnBD(cedula, conexionBD);
         conexionBD.cerrarConexion();
 
         if (usuarioValido) {
             idUsuarioValidado = cedula;
-            // Si el usuario es válido, abrir la siguiente ventana
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.setVisible(true);
-//            this.setVisible(false);
+            // Pasar la id_usuario a la ventana RegistoReciclaje
+            RegistoReciclaje registoReciclaje = new RegistoReciclaje(idUsuarioValidado);
+            registoReciclaje.setVisible(true);
+            this.setVisible(false);
         } else {
             // Si el usuario no es válido, mostrar un mensaje de error
             JOptionPane.showMessageDialog(this, "No estás registrado", "Error", JOptionPane.ERROR_MESSAGE);
