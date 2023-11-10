@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.ConexionBD;
 import Modelo.Ubicacion;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,12 +16,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Darwin Criollo
  */
 public class datosIngresados extends javax.swing.JFrame {
-
+ConexionBD conexion = new ConexionBD();
     /**
      * Creates new form datosIngresados
      */
     public datosIngresados() {
         initComponents();
+        
     }
 
     /**s
@@ -37,6 +39,7 @@ public class datosIngresados extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        Buscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,7 +53,7 @@ public class datosIngresados extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("generar datos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -67,6 +70,13 @@ public class datosIngresados extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
+        Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,24 +84,28 @@ public class datosIngresados extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(388, 388, 388)
+                .addGap(44, 44, 44))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(140, 140, 140)
+                .addComponent(Buscar)
+                .addGap(347, 347, 347))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(118, 118, 118)
-                .addComponent(jButton1)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(Buscar))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,7 +113,7 @@ public class datosIngresados extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     // Crear una instancia de la clase ConexionBD
-    ConexionBD conexion = new ConexionBD();
+    
 
     // Obtener el modelo de datos de la tabla usuarios
     DefaultTableModel modeloUsuarios = conexion.obtenerDatosUsuarios();
@@ -125,8 +139,39 @@ public class datosIngresados extends javax.swing.JFrame {
     }
 
     // Cerrar la conexión cuando ya no se necesite
-    conexion.cerrarConexion();
+    
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        // Mostrar un cuadro de diálogo de entrada para ingresar el código de ubicación
+    String codigoU = JOptionPane.showInputDialog(this, "Ingrese el código de ubicación:", "Buscar Ubicación", JOptionPane.QUESTION_MESSAGE);
+
+    // Verificar si se ingresó un código de ubicación
+    if (codigoU != null && !codigoU.isEmpty()) {
+        // Obtener el modelo de la tabla de ubicación
+        DefaultTableModel modeloUbicacion = (DefaultTableModel) jTable2.getModel();
+
+        // Eliminar todas las filas actuales de la tabla
+        modeloUbicacion.setRowCount(0);
+
+        // Recorrer el modelo original de la tabla y agregar solo las filas que coincidan con el código de ubicación
+        DefaultTableModel modeloOriginal = conexion.obtenerDatosUbicacion();
+        for (int i = 0; i < modeloOriginal.getRowCount(); i++) {
+            String codigoUbicacion = modeloOriginal.getValueAt(i, 4).toString(); // Suponiendo que el código de ubicación está en la última columna
+            if (codigoUbicacion.equals(codigoU)) {
+                modeloUbicacion.addRow(new Object[]{
+                    modeloOriginal.getValueAt(i, 0), // Código
+                    modeloOriginal.getValueAt(i, 1), // Ciudad
+                    modeloOriginal.getValueAt(i, 2), // Barrio
+                    modeloOriginal.getValueAt(i, 3), // Departamento
+                    modeloOriginal.getValueAt(i, 4)  // Descripción
+                });
+            }
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Debe ingresar un código de ubicación válido.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_BuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,6 +209,7 @@ public class datosIngresados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Buscar;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
